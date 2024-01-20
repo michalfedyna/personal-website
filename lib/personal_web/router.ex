@@ -14,10 +14,28 @@ defmodule PersonalWeb.Router do
     plug :accepts, ["json"]
   end
 
+  pipeline :auth do
+  end
+
   scope "/", PersonalWeb do
     pipe_through :browser
 
     get "/", PageController, :index
+    get "/portfolio", PortfolioController, :index
+    get "/blog", BlogController, :index
+    get "/blog/:id", BlogController, :show
+    get "/blog/:title", BlogController, :show
+    get "/blog/tag/:tag", BlogController, :tag
+    get "/blog/category/:category", BlogController, :category
+    get "/blog/author/:author", BlogController, :author
+    get "/contact", ContactController, :index
+  end
+
+  scope "", PersonalWeb do
+    pipe_through [:browser, :auth]
+
+    get "/admin", AdminController, :index
+    get "/publisher", PublisherController, :index
   end
 
   # Other scopes may use custom stacks.
