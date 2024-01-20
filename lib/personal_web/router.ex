@@ -14,7 +14,10 @@ defmodule PersonalWeb.Router do
     plug :accepts, ["json"]
   end
 
-  pipeline :auth do
+  pipeline :admin_auth do
+  end
+
+  pipeline :publisher_auth do
   end
 
   scope "/", PersonalWeb do
@@ -31,10 +34,15 @@ defmodule PersonalWeb.Router do
     get "/contact", ContactController, :index
   end
 
-  scope "", PersonalWeb do
-    pipe_through [:browser, :auth]
+  scope "/", PersonalWeb do
+    pipe_through [:browser, :admin_auth]
 
     get "/admin", AdminController, :index
+  end
+
+  scope "/", PersonalWeb do
+    pipe_through [:browser, :publisher_auth]
+
     get "/publisher", PublisherController, :index
   end
 
