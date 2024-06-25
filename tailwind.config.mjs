@@ -10,6 +10,7 @@ export default {
         serif: ['"Poppins"', ...defaultTheme.fontFamily.serif],
       },
       colors: {
+        brand: "#3178C6",
         primary: colors.blue[400],
         secondary: colors.blue[900],
         action: colors.amber[400],
